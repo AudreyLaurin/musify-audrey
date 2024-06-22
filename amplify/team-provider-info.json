@@ -10,6 +10,21 @@
       "StackName": "amplify-musifyaudrey-dev-08ff0",
       "StackId": "arn:aws:cloudformation:us-east-1:381492272245:stack/amplify-musifyaudrey-dev-08ff0/134f97f0-2e41-11ef-a8ad-12a118e973d9",
       "AmplifyAppId": "d2meq1qxmn5apw"
+    },
+    "categories": {
+      "function": {
+        "musifyaudrey": {
+          "deploymentBucketName": "amplify-musifyaudrey-dev-08ff0-deployment",
+          "s3Key": "amplify-builds/musifyaudrey-4267727a4a506c7a4742-build.zip"
+        }
+      },
+      "api": {
+        "musifyaudrey": {},
+        "musifyaudreyrest": {}
+      },
+      "auth": {
+        "musifyaudrey5f4c0293": {}
+      }
     }
   }
 }

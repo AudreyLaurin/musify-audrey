@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "paths": {
+    "/users": {
+      "name": "/users",
+      "lambdaFunction": "musifyaudrey",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/albums": {
+      "name": "/albums",
+      "lambdaFunction": "musifyaudrey",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/songs": {
+      "name": "/songs",
+      "lambdaFunction": "musifyaudrey",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/sharedSongs": {
+      "name": "/sharedSongs",
+      "lambdaFunction": "musifyaudrey",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

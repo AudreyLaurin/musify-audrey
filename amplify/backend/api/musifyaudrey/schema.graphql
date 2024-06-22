@@ -1,0 +1,33 @@
+type User @model @auth(rules: [{ allow: public, provider: apiKey }]) {
+  id: ID!
+  userId: String!
+  username: String!
+  albums: [Album]! @hasMany
+  songs: [Song]! @hasMany
+  sharedSongs: [SharedSong] @hasMany
+}
+
+type Song @model @auth(rules: [{ allow: public, provider: apiKey }]) {
+  id: ID!
+  key: String!
+  title: String!
+  uploader: User! @belongsTo
+  album: Album! @belongsTo
+  language: String
+}
+
+type Album @model @auth(rules: [{ allow: public, provider: apiKey }]) {
+  id: ID!
+  uploader: User! @belongsTo
+  artist: String!
+  title: String!
+  year: Int!
+  songs: [Song]! @hasMany
+  picture: String
+}
+
+type SharedSong @model @auth(rules: [{ allow: public, provider: apiKey }]) {
+  id: ID!
+  songId: ID!
+  user: User! @belongsTo
+}
