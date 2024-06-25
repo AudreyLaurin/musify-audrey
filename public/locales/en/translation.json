@@ -1,0 +1,19 @@
+{
+  "greeting": "Hello",
+  "profileButton": "Profile",
+  "sharedSongsButton": "Shared songs",
+  "uploadButton": "Upload",
+  "searchBar": "Search",
+  "confirmButton": "Confirm",
+  "addButton": "Add",
+  "cancelButton": "Cancel",
+  "deleteButton": "Delete",
+  "modifyButton": "Modify",
+  "shareButton": "Share",
+  "albumPicture": "Album Cover",
+  "albumTitle": "Album",
+  "releaseYear": "Album Release Year",
+  "artist": "Artist",
+  "title": "Title",
+  "language": "Language"
+}
