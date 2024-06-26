@@ -1,22 +1,23 @@
-type User @model @auth(rules: [{ allow: public, provider: apiKey }]) {
+type User @model @auth(rules: [{allow: public, provider: apiKey}]) {
   id: ID!
   userId: String!
   username: String!
   albums: [Album]! @hasMany
   songs: [Song]! @hasMany
-  sharedSongs: [SharedSong] @hasMany
+  sharedSongs: [Song] @manyToMany(relationName: "UserSong")
 }
 
-type Song @model @auth(rules: [{ allow: public, provider: apiKey }]) {
+type Song @model @auth(rules: [{allow: public, provider: apiKey}]) {
   id: ID!
   key: String!
   title: String!
   uploader: User! @belongsTo
   album: Album! @belongsTo
   language: String
+  users: [User] @manyToMany(relationName: "UserSong")
 }
 
-type Album @model @auth(rules: [{ allow: public, provider: apiKey }]) {
+type Album @model @auth(rules: [{allow: public, provider: apiKey}]) {
   id: ID!
   uploader: User! @belongsTo
   artist: String!
@@ -25,9 +26,4 @@ type Album @model @auth(rules: [{ allow: public, provider: apiKey }]) {
   songs: [Song]! @hasMany
   picture: String
 }
-
-type SharedSong @model @auth(rules: [{ allow: public, provider: apiKey }]) {
-  id: ID!
-  songId: ID!
-  user: User! @belongsTo
-}
+ 

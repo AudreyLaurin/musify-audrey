@@ -5,26 +5,11 @@ exports.song_detail = asyncHandler(async (req, res, next) => {
     await executeQuery(`query GetSong($id: ID!) {
             getSong(id: $id) {
                 id
+                userID
+                albumID
                 key
                 title
-                uploader {
-                  id
-                  userId
-                  username
-                }
-                album {
-                  id
-                  artist
-                  title
-                  year
-                  userAlbumsId
-                  uploader {
-                    id
-                    userId
-                    username
-                  }
-                }
-                userSongsId
+                language
               }
             }`, "getSong", {id: req.params.id}, req, res);
 });
@@ -33,28 +18,18 @@ exports.song_detail = asyncHandler(async (req, res, next) => {
 // Handle song create on POST.
 exports.song_create = asyncHandler(async (req, res, next) => {
     await executeQuery(`mutation CreateSong(
+        $userID: ID!
+        $albumID: ID!
         $key: String!
         $title: String!
-        $userSongsId: ID!
-        $albumSongsId: ID!
         $language: String
       ) {
-      createSong(input: {key: $key, title: $title, userSongsId: $userSongsId, albumSongsId: $albumSongsId, language: $language}) {
+      createSong(input: {userID: $userID, albumID: $albumID, key: $key, title: $title, language: $language}) {
         id
+        userID
+        albumID
         key
         title
-        uploader {
-          id
-          username
-        }
-        albumSongsId
-        album {
-          id
-          artist
-          title
-          year
-        }
-        userSongsId
         language
       }
     }
@@ -65,26 +40,12 @@ exports.song_list = asyncHandler(async (req, res, next) => {
     await executeQuery(`query ListSongs{
               listSongs {
                 items {
-                  id
-                  key
+                id
+                userID
+                albumID
+                key
                 title
-                uploader {
-                  id
-                  userId
-                  username
-                }
-                album {
-                  id
-                  artist
-                  title
-                  year
-                  userAlbumsId
-                  uploader {
-                    id
-                    userId
-                    username
-                  }
-                }
+                language
               }
             }
             }
@@ -96,15 +57,15 @@ exports.song_update = asyncHandler(async (req, res, next) => {
         $id: ID!
         $key: String
         $title: String
-        $albumSongsId: ID
+        $albumID: ID
         $language: String
         ) {
-            updateSong(input: {id: $id, key: $key, title: $title, albumSongsId: $albumSongsId, language: $language}) {
+            updateSong(input: {id: $id, key: $key, title: $title, albumID: $albumID, language: $language}) {
             id
             key
             title
-            albumSongsId
-            userSongsId
+            albumID
+            language
           }
         }`, "updateSong", {
         id: req.params.id, ...req.body

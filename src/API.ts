@@ -65,7 +65,7 @@ export type User = {
   username: string,
   albums?: ModelAlbumConnection | null,
   songs?: ModelSongConnection | null,
-  sharedSongs?: ModelSharedSongConnection | null,
+  sharedSongs?: ModelUserSongConnection | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -104,26 +104,28 @@ export type Song = {
   uploader: User,
   album: Album,
   language?: string | null,
+  users?: ModelUserSongConnection | null,
   createdAt: string,
   updatedAt: string,
   userSongsId: string,
   albumSongsId: string,
 };
 
-export type ModelSharedSongConnection = {
-  __typename: "ModelSharedSongConnection",
-  items:  Array<SharedSong | null >,
+export type ModelUserSongConnection = {
+  __typename: "ModelUserSongConnection",
+  items:  Array<UserSong | null >,
   nextToken?: string | null,
 };
 
-export type SharedSong = {
-  __typename: "SharedSong",
+export type UserSong = {
+  __typename: "UserSong",
   id: string,
+  userId: string,
   songId: string,
   user: User,
+  song: Song,
   createdAt: string,
   updatedAt: string,
-  userSharedSongsId?: string | null,
 };
 
 export type UpdateUserInput = {
@@ -234,29 +236,29 @@ export type DeleteAlbumInput = {
   id: string,
 };
 
-export type CreateSharedSongInput = {
+export type CreateUserSongInput = {
   id?: string | null,
+  userId: string,
   songId: string,
-  userSharedSongsId?: string | null,
 };
 
-export type ModelSharedSongConditionInput = {
+export type ModelUserSongConditionInput = {
+  userId?: ModelIDInput | null,
   songId?: ModelIDInput | null,
-  and?: Array< ModelSharedSongConditionInput | null > | null,
-  or?: Array< ModelSharedSongConditionInput | null > | null,
-  not?: ModelSharedSongConditionInput | null,
+  and?: Array< ModelUserSongConditionInput | null > | null,
+  or?: Array< ModelUserSongConditionInput | null > | null,
+  not?: ModelUserSongConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  userSharedSongsId?: ModelIDInput | null,
 };
 
-export type UpdateSharedSongInput = {
+export type UpdateUserSongInput = {
   id: string,
+  userId?: string | null,
   songId?: string | null,
-  userSharedSongsId?: string | null,
 };
 
-export type DeleteSharedSongInput = {
+export type DeleteUserSongInput = {
   id: string,
 };
 
@@ -305,16 +307,22 @@ export type ModelAlbumFilterInput = {
   userAlbumsId?: ModelIDInput | null,
 };
 
-export type ModelSharedSongFilterInput = {
+export type ModelUserSongFilterInput = {
   id?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
   songId?: ModelIDInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  and?: Array< ModelSharedSongFilterInput | null > | null,
-  or?: Array< ModelSharedSongFilterInput | null > | null,
-  not?: ModelSharedSongFilterInput | null,
-  userSharedSongsId?: ModelIDInput | null,
+  and?: Array< ModelUserSongFilterInput | null > | null,
+  or?: Array< ModelUserSongFilterInput | null > | null,
+  not?: ModelUserSongFilterInput | null,
 };
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
 
 export type ModelSubscriptionUserFilterInput = {
   id?: ModelSubscriptionIDInput | null,
@@ -326,7 +334,6 @@ export type ModelSubscriptionUserFilterInput = {
   or?: Array< ModelSubscriptionUserFilterInput | null > | null,
   userAlbumsId?: ModelSubscriptionIDInput | null,
   userSongsId?: ModelSubscriptionIDInput | null,
-  userSharedSongsId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -395,13 +402,14 @@ export type ModelSubscriptionIntInput = {
   notIn?: Array< number | null > | null,
 };
 
-export type ModelSubscriptionSharedSongFilterInput = {
+export type ModelSubscriptionUserSongFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  userId?: ModelSubscriptionIDInput | null,
   songId?: ModelSubscriptionIDInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionSharedSongFilterInput | null > | null,
-  or?: Array< ModelSubscriptionSharedSongFilterInput | null > | null,
+  and?: Array< ModelSubscriptionUserSongFilterInput | null > | null,
+  or?: Array< ModelSubscriptionUserSongFilterInput | null > | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -424,7 +432,7 @@ export type CreateUserMutation = {
       nextToken?: string | null,
     } | null,
     sharedSongs?:  {
-      __typename: "ModelSharedSongConnection",
+      __typename: "ModelUserSongConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -452,7 +460,7 @@ export type UpdateUserMutation = {
       nextToken?: string | null,
     } | null,
     sharedSongs?:  {
-      __typename: "ModelSharedSongConnection",
+      __typename: "ModelUserSongConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -480,7 +488,7 @@ export type DeleteUserMutation = {
       nextToken?: string | null,
     } | null,
     sharedSongs?:  {
-      __typename: "ModelSharedSongConnection",
+      __typename: "ModelUserSongConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -519,6 +527,10 @@ export type CreateSongMutation = {
       userAlbumsId: string,
     },
     language?: string | null,
+    users?:  {
+      __typename: "ModelUserSongConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     userSongsId: string,
@@ -557,6 +569,10 @@ export type UpdateSongMutation = {
       userAlbumsId: string,
     },
     language?: string | null,
+    users?:  {
+      __typename: "ModelUserSongConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     userSongsId: string,
@@ -595,6 +611,10 @@ export type DeleteSongMutation = {
       userAlbumsId: string,
     },
     language?: string | null,
+    users?:  {
+      __typename: "ModelUserSongConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     userSongsId: string,
@@ -695,15 +715,16 @@ export type DeleteAlbumMutation = {
   } | null,
 };
 
-export type CreateSharedSongMutationVariables = {
-  input: CreateSharedSongInput,
-  condition?: ModelSharedSongConditionInput | null,
+export type CreateUserSongMutationVariables = {
+  input: CreateUserSongInput,
+  condition?: ModelUserSongConditionInput | null,
 };
 
-export type CreateSharedSongMutation = {
-  createSharedSong?:  {
-    __typename: "SharedSong",
+export type CreateUserSongMutation = {
+  createUserSong?:  {
+    __typename: "UserSong",
     id: string,
+    userId: string,
     songId: string,
     user:  {
       __typename: "User",
@@ -713,21 +734,32 @@ export type CreateSharedSongMutation = {
       createdAt: string,
       updatedAt: string,
     },
+    song:  {
+      __typename: "Song",
+      id: string,
+      key: string,
+      title: string,
+      language?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      userSongsId: string,
+      albumSongsId: string,
+    },
     createdAt: string,
     updatedAt: string,
-    userSharedSongsId?: string | null,
   } | null,
 };
 
-export type UpdateSharedSongMutationVariables = {
-  input: UpdateSharedSongInput,
-  condition?: ModelSharedSongConditionInput | null,
+export type UpdateUserSongMutationVariables = {
+  input: UpdateUserSongInput,
+  condition?: ModelUserSongConditionInput | null,
 };
 
-export type UpdateSharedSongMutation = {
-  updateSharedSong?:  {
-    __typename: "SharedSong",
+export type UpdateUserSongMutation = {
+  updateUserSong?:  {
+    __typename: "UserSong",
     id: string,
+    userId: string,
     songId: string,
     user:  {
       __typename: "User",
@@ -737,21 +769,32 @@ export type UpdateSharedSongMutation = {
       createdAt: string,
       updatedAt: string,
     },
+    song:  {
+      __typename: "Song",
+      id: string,
+      key: string,
+      title: string,
+      language?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      userSongsId: string,
+      albumSongsId: string,
+    },
     createdAt: string,
     updatedAt: string,
-    userSharedSongsId?: string | null,
   } | null,
 };
 
-export type DeleteSharedSongMutationVariables = {
-  input: DeleteSharedSongInput,
-  condition?: ModelSharedSongConditionInput | null,
+export type DeleteUserSongMutationVariables = {
+  input: DeleteUserSongInput,
+  condition?: ModelUserSongConditionInput | null,
 };
 
-export type DeleteSharedSongMutation = {
-  deleteSharedSong?:  {
-    __typename: "SharedSong",
+export type DeleteUserSongMutation = {
+  deleteUserSong?:  {
+    __typename: "UserSong",
     id: string,
+    userId: string,
     songId: string,
     user:  {
       __typename: "User",
@@ -761,9 +804,19 @@ export type DeleteSharedSongMutation = {
       createdAt: string,
       updatedAt: string,
     },
+    song:  {
+      __typename: "Song",
+      id: string,
+      key: string,
+      title: string,
+      language?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      userSongsId: string,
+      albumSongsId: string,
+    },
     createdAt: string,
     updatedAt: string,
-    userSharedSongsId?: string | null,
   } | null,
 };
 
@@ -786,7 +839,7 @@ export type GetUserQuery = {
       nextToken?: string | null,
     } | null,
     sharedSongs?:  {
-      __typename: "ModelSharedSongConnection",
+      __typename: "ModelUserSongConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -845,6 +898,10 @@ export type GetSongQuery = {
       userAlbumsId: string,
     },
     language?: string | null,
+    users?:  {
+      __typename: "ModelUserSongConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     userSongsId: string,
@@ -930,14 +987,15 @@ export type ListAlbumsQuery = {
   } | null,
 };
 
-export type GetSharedSongQueryVariables = {
+export type GetUserSongQueryVariables = {
   id: string,
 };
 
-export type GetSharedSongQuery = {
-  getSharedSong?:  {
-    __typename: "SharedSong",
+export type GetUserSongQuery = {
+  getUserSong?:  {
+    __typename: "UserSong",
     id: string,
+    userId: string,
     songId: string,
     user:  {
       __typename: "User",
@@ -947,28 +1005,84 @@ export type GetSharedSongQuery = {
       createdAt: string,
       updatedAt: string,
     },
+    song:  {
+      __typename: "Song",
+      id: string,
+      key: string,
+      title: string,
+      language?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      userSongsId: string,
+      albumSongsId: string,
+    },
     createdAt: string,
     updatedAt: string,
-    userSharedSongsId?: string | null,
   } | null,
 };
 
-export type ListSharedSongsQueryVariables = {
-  filter?: ModelSharedSongFilterInput | null,
+export type ListUserSongsQueryVariables = {
+  filter?: ModelUserSongFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListSharedSongsQuery = {
-  listSharedSongs?:  {
-    __typename: "ModelSharedSongConnection",
+export type ListUserSongsQuery = {
+  listUserSongs?:  {
+    __typename: "ModelUserSongConnection",
     items:  Array< {
-      __typename: "SharedSong",
+      __typename: "UserSong",
       id: string,
+      userId: string,
       songId: string,
       createdAt: string,
       updatedAt: string,
-      userSharedSongsId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type UserSongsByUserIdQueryVariables = {
+  userId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelUserSongFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type UserSongsByUserIdQuery = {
+  userSongsByUserId?:  {
+    __typename: "ModelUserSongConnection",
+    items:  Array< {
+      __typename: "UserSong",
+      id: string,
+      userId: string,
+      songId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type UserSongsBySongIdQueryVariables = {
+  songId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelUserSongFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type UserSongsBySongIdQuery = {
+  userSongsBySongId?:  {
+    __typename: "ModelUserSongConnection",
+    items:  Array< {
+      __typename: "UserSong",
+      id: string,
+      userId: string,
+      songId: string,
+      createdAt: string,
+      updatedAt: string,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -993,7 +1107,7 @@ export type OnCreateUserSubscription = {
       nextToken?: string | null,
     } | null,
     sharedSongs?:  {
-      __typename: "ModelSharedSongConnection",
+      __typename: "ModelUserSongConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1020,7 +1134,7 @@ export type OnUpdateUserSubscription = {
       nextToken?: string | null,
     } | null,
     sharedSongs?:  {
-      __typename: "ModelSharedSongConnection",
+      __typename: "ModelUserSongConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1047,7 +1161,7 @@ export type OnDeleteUserSubscription = {
       nextToken?: string | null,
     } | null,
     sharedSongs?:  {
-      __typename: "ModelSharedSongConnection",
+      __typename: "ModelUserSongConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1085,6 +1199,10 @@ export type OnCreateSongSubscription = {
       userAlbumsId: string,
     },
     language?: string | null,
+    users?:  {
+      __typename: "ModelUserSongConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     userSongsId: string,
@@ -1122,6 +1240,10 @@ export type OnUpdateSongSubscription = {
       userAlbumsId: string,
     },
     language?: string | null,
+    users?:  {
+      __typename: "ModelUserSongConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     userSongsId: string,
@@ -1159,6 +1281,10 @@ export type OnDeleteSongSubscription = {
       userAlbumsId: string,
     },
     language?: string | null,
+    users?:  {
+      __typename: "ModelUserSongConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     userSongsId: string,
@@ -1256,14 +1382,15 @@ export type OnDeleteAlbumSubscription = {
   } | null,
 };
 
-export type OnCreateSharedSongSubscriptionVariables = {
-  filter?: ModelSubscriptionSharedSongFilterInput | null,
+export type OnCreateUserSongSubscriptionVariables = {
+  filter?: ModelSubscriptionUserSongFilterInput | null,
 };
 
-export type OnCreateSharedSongSubscription = {
-  onCreateSharedSong?:  {
-    __typename: "SharedSong",
+export type OnCreateUserSongSubscription = {
+  onCreateUserSong?:  {
+    __typename: "UserSong",
     id: string,
+    userId: string,
     songId: string,
     user:  {
       __typename: "User",
@@ -1273,20 +1400,31 @@ export type OnCreateSharedSongSubscription = {
       createdAt: string,
       updatedAt: string,
     },
+    song:  {
+      __typename: "Song",
+      id: string,
+      key: string,
+      title: string,
+      language?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      userSongsId: string,
+      albumSongsId: string,
+    },
     createdAt: string,
     updatedAt: string,
-    userSharedSongsId?: string | null,
   } | null,
 };
 
-export type OnUpdateSharedSongSubscriptionVariables = {
-  filter?: ModelSubscriptionSharedSongFilterInput | null,
+export type OnUpdateUserSongSubscriptionVariables = {
+  filter?: ModelSubscriptionUserSongFilterInput | null,
 };
 
-export type OnUpdateSharedSongSubscription = {
-  onUpdateSharedSong?:  {
-    __typename: "SharedSong",
+export type OnUpdateUserSongSubscription = {
+  onUpdateUserSong?:  {
+    __typename: "UserSong",
     id: string,
+    userId: string,
     songId: string,
     user:  {
       __typename: "User",
@@ -1296,20 +1434,31 @@ export type OnUpdateSharedSongSubscription = {
       createdAt: string,
       updatedAt: string,
     },
+    song:  {
+      __typename: "Song",
+      id: string,
+      key: string,
+      title: string,
+      language?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      userSongsId: string,
+      albumSongsId: string,
+    },
     createdAt: string,
     updatedAt: string,
-    userSharedSongsId?: string | null,
   } | null,
 };
 
-export type OnDeleteSharedSongSubscriptionVariables = {
-  filter?: ModelSubscriptionSharedSongFilterInput | null,
+export type OnDeleteUserSongSubscriptionVariables = {
+  filter?: ModelSubscriptionUserSongFilterInput | null,
 };
 
-export type OnDeleteSharedSongSubscription = {
-  onDeleteSharedSong?:  {
-    __typename: "SharedSong",
+export type OnDeleteUserSongSubscription = {
+  onDeleteUserSong?:  {
+    __typename: "UserSong",
     id: string,
+    userId: string,
     songId: string,
     user:  {
       __typename: "User",
@@ -1319,8 +1468,18 @@ export type OnDeleteSharedSongSubscription = {
       createdAt: string,
       updatedAt: string,
     },
+    song:  {
+      __typename: "Song",
+      id: string,
+      key: string,
+      title: string,
+      language?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      userSongsId: string,
+      albumSongsId: string,
+    },
     createdAt: string,
     updatedAt: string,
-    userSharedSongsId?: string | null,
   } | null,
 };

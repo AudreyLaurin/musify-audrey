@@ -8,19 +8,7 @@ exports.album_detail = asyncHandler(async (req, res, next) => {
                 artist
                 title
                 year
-                uploader {
-                  id
-                  userId
-                  username
-                }
                 picture
-                songs {
-                  items {
-                    id
-                    key
-                    title
-                  }
-                }
               }
             }`, "getAlbum", {id: req.params.id}, req, res);
 });
@@ -29,18 +17,18 @@ exports.album_detail = asyncHandler(async (req, res, next) => {
 // Handle album create on POST.
 exports.album_create = asyncHandler(async (req, res, next) => {
     await executeQuery(`mutation CreateAlbum(
+        $userID: ID!
         $artist: String!
         $title: String!
         $year: Int!
-        $userAlbumsId: ID!
         $picture: String
       ) {
-      createAlbum(input: {artist: $artist, title: $title, year: $year, userAlbumsId: $userAlbumsId, picture: $picture}) {
+      createAlbum(input: {userID: $userID, artist: $artist, title: $title, year: $year, picture: $picture}) {
         id
+        userID
         artist
         title
         year
-        userAlbumsId
         picture
       }
     }
@@ -55,19 +43,7 @@ exports.album_list = asyncHandler(async (req, res, next) => {
                     artist
                     title
                     year
-                    uploader {
-                      id
-                      userId
-                      username
-                    }
                     picture
-                    songs {
-                      items {
-                        id
-                        key
-                        title
-                      }
-                    }
                   }
                 }
             }
@@ -87,7 +63,6 @@ exports.album_update = asyncHandler(async (req, res, next) => {
             artist
             title
             year
-            userAlbumsId
             picture
           }
         }`, "updateAlbum", {

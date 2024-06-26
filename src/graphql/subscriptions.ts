@@ -111,6 +111,10 @@ export const onCreateSong = /* GraphQL */ `subscription OnCreateSong($filter: Mo
       __typename
     }
     language
+    users {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     userSongsId
@@ -147,6 +151,10 @@ export const onUpdateSong = /* GraphQL */ `subscription OnUpdateSong($filter: Mo
       __typename
     }
     language
+    users {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     userSongsId
@@ -183,6 +191,10 @@ export const onDeleteSong = /* GraphQL */ `subscription OnDeleteSong($filter: Mo
       __typename
     }
     language
+    users {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     userSongsId
@@ -281,11 +293,10 @@ export const onDeleteAlbum = /* GraphQL */ `subscription OnDeleteAlbum($filter: 
   APITypes.OnDeleteAlbumSubscriptionVariables,
   APITypes.OnDeleteAlbumSubscription
 >;
-export const onCreateSharedSong = /* GraphQL */ `subscription OnCreateSharedSong(
-  $filter: ModelSubscriptionSharedSongFilterInput
-) {
-  onCreateSharedSong(filter: $filter) {
+export const onCreateUserSong = /* GraphQL */ `subscription OnCreateUserSong($filter: ModelSubscriptionUserSongFilterInput) {
+  onCreateUserSong(filter: $filter) {
     id
+    userId
     songId
     user {
       id
@@ -295,21 +306,30 @@ export const onCreateSharedSong = /* GraphQL */ `subscription OnCreateSharedSong
       updatedAt
       __typename
     }
+    song {
+      id
+      key
+      title
+      language
+      createdAt
+      updatedAt
+      userSongsId
+      albumSongsId
+      __typename
+    }
     createdAt
     updatedAt
-    userSharedSongsId
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateSharedSongSubscriptionVariables,
-  APITypes.OnCreateSharedSongSubscription
+  APITypes.OnCreateUserSongSubscriptionVariables,
+  APITypes.OnCreateUserSongSubscription
 >;
-export const onUpdateSharedSong = /* GraphQL */ `subscription OnUpdateSharedSong(
-  $filter: ModelSubscriptionSharedSongFilterInput
-) {
-  onUpdateSharedSong(filter: $filter) {
+export const onUpdateUserSong = /* GraphQL */ `subscription OnUpdateUserSong($filter: ModelSubscriptionUserSongFilterInput) {
+  onUpdateUserSong(filter: $filter) {
     id
+    userId
     songId
     user {
       id
@@ -319,21 +339,30 @@ export const onUpdateSharedSong = /* GraphQL */ `subscription OnUpdateSharedSong
       updatedAt
       __typename
     }
+    song {
+      id
+      key
+      title
+      language
+      createdAt
+      updatedAt
+      userSongsId
+      albumSongsId
+      __typename
+    }
     createdAt
     updatedAt
-    userSharedSongsId
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateSharedSongSubscriptionVariables,
-  APITypes.OnUpdateSharedSongSubscription
+  APITypes.OnUpdateUserSongSubscriptionVariables,
+  APITypes.OnUpdateUserSongSubscription
 >;
-export const onDeleteSharedSong = /* GraphQL */ `subscription OnDeleteSharedSong(
-  $filter: ModelSubscriptionSharedSongFilterInput
-) {
-  onDeleteSharedSong(filter: $filter) {
+export const onDeleteUserSong = /* GraphQL */ `subscription OnDeleteUserSong($filter: ModelSubscriptionUserSongFilterInput) {
+  onDeleteUserSong(filter: $filter) {
     id
+    userId
     songId
     user {
       id
@@ -343,13 +372,23 @@ export const onDeleteSharedSong = /* GraphQL */ `subscription OnDeleteSharedSong
       updatedAt
       __typename
     }
+    song {
+      id
+      key
+      title
+      language
+      createdAt
+      updatedAt
+      userSongsId
+      albumSongsId
+      __typename
+    }
     createdAt
     updatedAt
-    userSharedSongsId
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteSharedSongSubscriptionVariables,
-  APITypes.OnDeleteSharedSongSubscription
+  APITypes.OnDeleteUserSongSubscriptionVariables,
+  APITypes.OnDeleteUserSongSubscription
 >;

@@ -4,34 +4,31 @@ const {executeQuery} = require("../helpers/executeQuery");
 exports.user_detail = asyncHandler(async (req, res, next) => {
     await executeQuery(`query GetUser($id: ID!) {
             getUser(id: $id) {
-              id
-              userId
-              username
-              albums {
-                items {
-                  id
-                  artist
-                  title
-                  year
-                  picture
-                  userAlbumsId
+                id
+                userId
+                username
+                albums {
+                  items {
+                    id
+                    artist
+                    title
+                    year
+                    picture
+                  }
                 }
-              }
-              songs {
-                items {
-                  id
-                  key
-                  title
-                  language
-                  albumSongsId
-                  userSongsId
+                songs {
+                  items {
+                    id
+                    key
+                    title
+                    language
+                    albumID
+                  }
                 }
-              }
-              sharedSongs {
-                items {
-                  id
-                  songId
-                  userSharedSongsId
+                sharedSongs {
+                  items {
+                    id
+                    songId
                 }
               }
             }
@@ -58,35 +55,32 @@ exports.user_create = asyncHandler(async (req, res, next) => {
 exports.user_list = asyncHandler(async (req, res, next) => {
     await executeQuery(`query ListUsers {
        listUsers {
-    items {
-      id
-      userId
-      username
-      albums {
         items {
           id
-          artist
-          title
-          year
-          picture
-          userAlbumsId
+        userId
+        username
+        albums {
+          items {
+            id
+            artist
+            title
+            year
+            picture
+          }
         }
-      }
-      songs {
-        items {
-          id
-          key
-          title
-          language
-          albumSongsId
-          userSongsId
+        songs {
+          items {
+            id
+            key
+            title
+            language
+            albumID
+          }
         }
-      }
-      sharedSongs {
-        items {
-          id
-          songId
-          userSharedSongsId
+        sharedSongs {
+          items {
+            id
+            songId
         }
       }
     }

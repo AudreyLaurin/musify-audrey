@@ -4,12 +4,15 @@
       "dependsOn": [],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDate": "2025-06-22T17:59:29.830Z",
-              "apiKeyExpirationDays": 365,
-              "description": ""
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
             },
             "authenticationType": "API_KEY"
           }

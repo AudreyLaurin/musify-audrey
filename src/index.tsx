@@ -13,9 +13,6 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {LibraryScreen} from "./screens/LibraryScreen";
 import {PlayerScreen} from "./screens/PlayerScreen";
 import {UploadScreen} from "./screens/UploadScreen";
-import {SharedSongsScreen} from "./screens/SharedSongsScreen";
-
-import {Header} from "./components/Header";
 
 import awsconfig from "./amplifyconfiguration.json";
 import {Amplify} from "aws-amplify";
@@ -34,10 +31,6 @@ const router = createBrowserRouter([
     {
         path: "/upload",
         element: <UploadScreen/>
-    },
-    {
-        path: "/shared-songs",
-        element: <SharedSongsScreen/>
     }
 ])
 
@@ -47,6 +40,7 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <React.Suspense fallback={"loading"}>
+            {/* Mettre le Authenticator pour englober tout ce que je veux qui soit caché*/}
             <RouterProvider router={router}/>
             {/*<App/>*/}
         </React.Suspense>

@@ -123,6 +123,10 @@ export const createSong = /* GraphQL */ `mutation CreateSong(
       __typename
     }
     language
+    users {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     userSongsId
@@ -162,6 +166,10 @@ export const updateSong = /* GraphQL */ `mutation UpdateSong(
       __typename
     }
     language
+    users {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     userSongsId
@@ -201,6 +209,10 @@ export const deleteSong = /* GraphQL */ `mutation DeleteSong(
       __typename
     }
     language
+    users {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     userSongsId
@@ -308,12 +320,13 @@ export const deleteAlbum = /* GraphQL */ `mutation DeleteAlbum(
   APITypes.DeleteAlbumMutationVariables,
   APITypes.DeleteAlbumMutation
 >;
-export const createSharedSong = /* GraphQL */ `mutation CreateSharedSong(
-  $input: CreateSharedSongInput!
-  $condition: ModelSharedSongConditionInput
+export const createUserSong = /* GraphQL */ `mutation CreateUserSong(
+  $input: CreateUserSongInput!
+  $condition: ModelUserSongConditionInput
 ) {
-  createSharedSong(input: $input, condition: $condition) {
+  createUserSong(input: $input, condition: $condition) {
     id
+    userId
     songId
     user {
       id
@@ -323,22 +336,33 @@ export const createSharedSong = /* GraphQL */ `mutation CreateSharedSong(
       updatedAt
       __typename
     }
+    song {
+      id
+      key
+      title
+      language
+      createdAt
+      updatedAt
+      userSongsId
+      albumSongsId
+      __typename
+    }
     createdAt
     updatedAt
-    userSharedSongsId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateSharedSongMutationVariables,
-  APITypes.CreateSharedSongMutation
+  APITypes.CreateUserSongMutationVariables,
+  APITypes.CreateUserSongMutation
 >;
-export const updateSharedSong = /* GraphQL */ `mutation UpdateSharedSong(
-  $input: UpdateSharedSongInput!
-  $condition: ModelSharedSongConditionInput
+export const updateUserSong = /* GraphQL */ `mutation UpdateUserSong(
+  $input: UpdateUserSongInput!
+  $condition: ModelUserSongConditionInput
 ) {
-  updateSharedSong(input: $input, condition: $condition) {
+  updateUserSong(input: $input, condition: $condition) {
     id
+    userId
     songId
     user {
       id
@@ -348,22 +372,33 @@ export const updateSharedSong = /* GraphQL */ `mutation UpdateSharedSong(
       updatedAt
       __typename
     }
+    song {
+      id
+      key
+      title
+      language
+      createdAt
+      updatedAt
+      userSongsId
+      albumSongsId
+      __typename
+    }
     createdAt
     updatedAt
-    userSharedSongsId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateSharedSongMutationVariables,
-  APITypes.UpdateSharedSongMutation
+  APITypes.UpdateUserSongMutationVariables,
+  APITypes.UpdateUserSongMutation
 >;
-export const deleteSharedSong = /* GraphQL */ `mutation DeleteSharedSong(
-  $input: DeleteSharedSongInput!
-  $condition: ModelSharedSongConditionInput
+export const deleteUserSong = /* GraphQL */ `mutation DeleteUserSong(
+  $input: DeleteUserSongInput!
+  $condition: ModelUserSongConditionInput
 ) {
-  deleteSharedSong(input: $input, condition: $condition) {
+  deleteUserSong(input: $input, condition: $condition) {
     id
+    userId
     songId
     user {
       id
@@ -373,13 +408,23 @@ export const deleteSharedSong = /* GraphQL */ `mutation DeleteSharedSong(
       updatedAt
       __typename
     }
+    song {
+      id
+      key
+      title
+      language
+      createdAt
+      updatedAt
+      userSongsId
+      albumSongsId
+      __typename
+    }
     createdAt
     updatedAt
-    userSharedSongsId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteSharedSongMutationVariables,
-  APITypes.DeleteSharedSongMutation
+  APITypes.DeleteUserSongMutationVariables,
+  APITypes.DeleteUserSongMutation
 >;

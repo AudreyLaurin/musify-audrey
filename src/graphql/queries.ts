@@ -75,6 +75,10 @@ export const getSong = /* GraphQL */ `query GetSong($id: ID!) {
       __typename
     }
     language
+    users {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     userSongsId
@@ -156,9 +160,10 @@ export const listAlbums = /* GraphQL */ `query ListAlbums(
   APITypes.ListAlbumsQueryVariables,
   APITypes.ListAlbumsQuery
 >;
-export const getSharedSong = /* GraphQL */ `query GetSharedSong($id: ID!) {
-  getSharedSong(id: $id) {
+export const getUserSong = /* GraphQL */ `query GetUserSong($id: ID!) {
+  getUserSong(id: $id) {
     id
+    userId
     songId
     user {
       id
@@ -168,28 +173,38 @@ export const getSharedSong = /* GraphQL */ `query GetSharedSong($id: ID!) {
       updatedAt
       __typename
     }
+    song {
+      id
+      key
+      title
+      language
+      createdAt
+      updatedAt
+      userSongsId
+      albumSongsId
+      __typename
+    }
     createdAt
     updatedAt
-    userSharedSongsId
     __typename
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetSharedSongQueryVariables,
-  APITypes.GetSharedSongQuery
+  APITypes.GetUserSongQueryVariables,
+  APITypes.GetUserSongQuery
 >;
-export const listSharedSongs = /* GraphQL */ `query ListSharedSongs(
-  $filter: ModelSharedSongFilterInput
+export const listUserSongs = /* GraphQL */ `query ListUserSongs(
+  $filter: ModelUserSongFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listSharedSongs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listUserSongs(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      userId
       songId
       createdAt
       updatedAt
-      userSharedSongsId
       __typename
     }
     nextToken
@@ -197,6 +212,66 @@ export const listSharedSongs = /* GraphQL */ `query ListSharedSongs(
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListSharedSongsQueryVariables,
-  APITypes.ListSharedSongsQuery
+  APITypes.ListUserSongsQueryVariables,
+  APITypes.ListUserSongsQuery
+>;
+export const userSongsByUserId = /* GraphQL */ `query UserSongsByUserId(
+  $userId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelUserSongFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  userSongsByUserId(
+    userId: $userId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      userId
+      songId
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.UserSongsByUserIdQueryVariables,
+  APITypes.UserSongsByUserIdQuery
+>;
+export const userSongsBySongId = /* GraphQL */ `query UserSongsBySongId(
+  $songId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelUserSongFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  userSongsBySongId(
+    songId: $songId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      userId
+      songId
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.UserSongsBySongIdQueryVariables,
+  APITypes.UserSongsBySongIdQuery
 >;

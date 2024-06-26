@@ -8,7 +8,7 @@
     "start": "nodemon index.js"
   },
   "dependencies": {
-    "aws-serverless-express": "^3.3.5",
+    "aws-serverless-express": "^3.4.0",
     "axios": "^1.7.2",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
