@@ -1,7 +1,7 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, {useState, ChangeEvent, useEffect} from 'react';
 import axios from 'axios';
 
-const MusicFileUpload: React.FC<{username: string}> = ({username}) => {
+const FileUpload: React.FC<{username: string}> = ({username}) => {
     const [file, setFile] = useState<File | null>(null);
     const [message, setMessage] = useState<string>('');
 
@@ -23,7 +23,7 @@ const MusicFileUpload: React.FC<{username: string}> = ({username}) => {
 
         try {
             // Adapt
-            const response = await axios.post('https://xt77fzczff.execute-api.us-east-1.amazonaws.com/dev/upload', formData, {
+            const response = await axios.post('https://s5uxb9nh6f.execute-api.us-east-1.amazonaws.com/dev/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -37,7 +37,6 @@ const MusicFileUpload: React.FC<{username: string}> = ({username}) => {
 
     return (
         <div>
-            {/*<h1>Music File Upload</h1>*/}
             <input
                 type="file" accept={"audio/mp3, audio/mp4"}
                 onChange={handleFileChange}
@@ -48,4 +47,4 @@ const MusicFileUpload: React.FC<{username: string}> = ({username}) => {
     );
 };
 
-export default MusicFileUpload;
+export default FileUpload;

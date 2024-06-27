@@ -28,6 +28,20 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/files": {
+      "name": "/files",
+      "lambdaFunction": "musifyaudrey",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/upload": {
+      "name": "/upload",
+      "lambdaFunction": "musifyaudrey",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

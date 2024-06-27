@@ -9,7 +9,7 @@ export const PlayerScreen = () => {
     return (
         <>
             <div>Player Screen</div>
-            <AudioPlayer/>
+            <AudioPlayer audioURL={undefined}/>
         </>
     )
 }

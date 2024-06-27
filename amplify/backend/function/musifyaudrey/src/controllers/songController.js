@@ -5,8 +5,8 @@ exports.song_detail = asyncHandler(async (req, res, next) => {
     await executeQuery(`query GetSong($id: ID!) {
             getSong(id: $id) {
                 id
-                userID
-                albumID
+                userSongsId
+                albumSongsId
                 key
                 title
                 language
@@ -18,16 +18,16 @@ exports.song_detail = asyncHandler(async (req, res, next) => {
 // Handle song create on POST.
 exports.song_create = asyncHandler(async (req, res, next) => {
     await executeQuery(`mutation CreateSong(
-        $userID: ID!
-        $albumID: ID!
+        $userSongsId: ID!
+        $albumSongsId: ID!
         $key: String!
         $title: String!
         $language: String
       ) {
-      createSong(input: {userID: $userID, albumID: $albumID, key: $key, title: $title, language: $language}) {
+      createSong(input: {userSongsId: $userSongsId, albumSongsId: $albumSongsId, key: $key, title: $title, language: $language}) {
         id
-        userID
-        albumID
+        userSongsId
+        albumSongsId
         key
         title
         language
@@ -41,8 +41,8 @@ exports.song_list = asyncHandler(async (req, res, next) => {
               listSongs {
                 items {
                 id
-                userID
-                albumID
+                userSongsId
+                albumSongsId
                 key
                 title
                 language
@@ -57,14 +57,14 @@ exports.song_update = asyncHandler(async (req, res, next) => {
         $id: ID!
         $key: String
         $title: String
-        $albumID: ID
+        $albumSongsId: ID
         $language: String
         ) {
-            updateSong(input: {id: $id, key: $key, title: $title, albumID: $albumID, language: $language}) {
+            updateSong(input: {id: $id, key: $key, title: $title, albumSongsId: $albumSongsId, language: $language}) {
             id
             key
             title
-            albumID
+            albumSongsId
             language
           }
         }`, "updateSong", {

@@ -1,5 +1,14 @@
 import {useTranslation} from "react-i18next";
 
+interface SongData {
+    albumPicture?: String;
+    albumTitle: String;
+    releaseYear: Number;
+    artist: String;
+    title: String;
+    language: String;
+}
+
 export const SongForm = () => {
     const {t} = useTranslation()
 

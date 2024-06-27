@@ -15,7 +15,7 @@
       "function": {
         "musifyaudrey": {
           "deploymentBucketName": "amplify-musifyaudrey-dev-08ff0-deployment",
-          "s3Key": "amplify-builds/musifyaudrey-32376a5346556a425a38-build.zip"
+          "s3Key": "amplify-builds/musifyaudrey-4f3933326c454e633531-build.zip"
         }
       },
       "api": {

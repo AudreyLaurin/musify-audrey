@@ -1,8 +1,12 @@
-export const AudioPlayer = () => {
+interface AudioPlayerProps {
+    audioURL: string | undefined;
+}
+
+export const AudioPlayer = ({audioURL}: AudioPlayerProps) => {
     return (
         <audio
             controls>
-            <source src="https://arsim-public.s3.amazonaws.com/audio.mp3" type="audio/mp3"/>
+            <source src={audioURL} type="audio/mp3"/>
         </audio>
     )
 }

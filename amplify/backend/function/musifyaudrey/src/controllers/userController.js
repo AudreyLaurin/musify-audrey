@@ -22,7 +22,7 @@ exports.user_detail = asyncHandler(async (req, res, next) => {
                     key
                     title
                     language
-                    albumID
+                    albumSongsId
                   }
                 }
                 sharedSongs {
@@ -74,7 +74,7 @@ exports.user_list = asyncHandler(async (req, res, next) => {
             key
             title
             language
-            albumID
+            albumSongsId
           }
         }
         sharedSongs {

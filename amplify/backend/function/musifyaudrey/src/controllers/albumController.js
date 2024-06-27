@@ -17,15 +17,15 @@ exports.album_detail = asyncHandler(async (req, res, next) => {
 // Handle album create on POST.
 exports.album_create = asyncHandler(async (req, res, next) => {
     await executeQuery(`mutation CreateAlbum(
-        $userID: ID!
+        $userAlbumsId: ID!
         $artist: String!
         $title: String!
         $year: Int!
         $picture: String
       ) {
-      createAlbum(input: {userID: $userID, artist: $artist, title: $title, year: $year, picture: $picture}) {
+      createAlbum(input: {userAlbumsId: $userAlbumsId, artist: $artist, title: $title, year: $year, picture: $picture}) {
         id
-        userID
+        userAlbumsId
         artist
         title
         year
