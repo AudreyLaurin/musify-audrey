@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './i18n';
 
@@ -40,9 +39,9 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <React.Suspense fallback={"loading"}>
-            {/* Mettre le Authenticator pour englober tout ce que je veux qui soit caché*/}
-            <RouterProvider router={router}/>
-            {/*<App/>*/}
+            <Authenticator>
+                <RouterProvider router={router}/>
+            </Authenticator>
         </React.Suspense>
     </React.StrictMode>
 );

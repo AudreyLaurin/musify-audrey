@@ -7,13 +7,9 @@ export const LibraryScreen = () => {
 
     useEffect(() => {
         document.title = "Musify - Library";
-        const songs = axios.get(`https://s5uxb9nh6f.execute-api.us-east-1.amazonaws.com/dev/users`, {
-            headers: {
-                "Access-Control-Allow-Origin" : "*"
-            }
-        })
+         axios.get(`${process.env.REACT_APP_REST_URL}/users`)
             .then(res => {
-                console.log(songs)
+                console.log(res.data)
             })
     }, []);
 

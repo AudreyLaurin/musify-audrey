@@ -12,8 +12,8 @@ async function handleSignOut() {
 export const SignOutAndLanguageSwitch = () => {
     return (
         <>
-            <button onClick={() => handleSignOut()}>SIGN OUT</button>
             <LanguageSwitch/>
+            <button onClick={() => handleSignOut()}>SIGN OUT</button>
         </>
     )
 }

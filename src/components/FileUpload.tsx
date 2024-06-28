@@ -23,7 +23,7 @@ const FileUpload: React.FC<{username: string}> = ({username}) => {
 
         try {
             // Adapt
-            const response = await axios.post('https://s5uxb9nh6f.execute-api.us-east-1.amazonaws.com/dev/upload', formData, {
+            const response = await axios.post(`${process.env.REACT_APP_REST_URL}/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

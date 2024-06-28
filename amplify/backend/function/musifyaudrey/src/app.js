@@ -9,8 +9,12 @@ const filesRouter = require('./routes/files')
 const uploadRouter = require('./routes/upload')
 
 // declare a new express app
-const app = express()
+const cors = require('cors');
+const app = express();
+// Use the cors middleware
+app.use(cors());
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(awsServerlessExpressMiddleware.eventContext())
 app.use('/users', usersRouter)
 app.use('/albums', albumsRouter)
