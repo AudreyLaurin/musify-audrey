@@ -13,7 +13,6 @@ exports.album_detail = asyncHandler(async (req, res, next) => {
             }`, "getAlbum", {id: req.params.id}, req, res);
 });
 
-
 // Handle album create on POST.
 exports.album_create = asyncHandler(async (req, res, next) => {
     await executeQuery(`mutation CreateAlbum(

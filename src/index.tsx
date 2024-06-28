@@ -39,9 +39,11 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <React.Suspense fallback={"loading"}>
-            <Authenticator>
-                <RouterProvider router={router}/>
-            </Authenticator>
+            <Authenticator.Provider>
+                <Authenticator>
+                    <RouterProvider router={router}/>
+                </Authenticator>
+            </Authenticator.Provider>
         </React.Suspense>
     </React.StrictMode>
 );

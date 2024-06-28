@@ -53,8 +53,8 @@ exports.user_create = asyncHandler(async (req, res, next) => {
 });
 
 exports.user_list = asyncHandler(async (req, res, next) => {
-    await executeQuery(`query ListUsers {
-       listUsers {
+    await executeQuery(`query ListUsers($userId: String) {
+       listUsers(filter: {userId: {contains: $userId}}) {
         items {
           id
         userId
@@ -86,7 +86,7 @@ exports.user_list = asyncHandler(async (req, res, next) => {
     }
   }
   }
-    `, "listUsers", {}, req, res)
+    `, "listUsers", {userId: req.query.userId}, req, res)
 })
 
 exports.user_update = asyncHandler(async (req, res, next) => {
