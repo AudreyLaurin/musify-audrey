@@ -1,18 +1,21 @@
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
+import '../App.css'
 import axios from "axios";
 import {useAuthenticator} from "@aws-amplify/ui-react";
+import {SignOutAndLanguageSwitch} from "../components/SignOutAndLanguageSwitch";
+import {Musify} from "../components/Musify";
 
 export const LibraryScreen = () => {
     const {t} = useTranslation()
-    const { user} = useAuthenticator((context) => [context.user]);
+    const {user} = useAuthenticator((context) => [context.user]);
 
     useEffect(() => {
         document.title = "Musify - Library";
 
-         axios.get(`${process.env.REACT_APP_REST_URL}/users?userId=${user.userId}`)
+        axios.get(`${process.env.REACT_APP_REST_URL}/users?userId=${user.userId}`)
             .then(res => {
-                if(res.data.items === null) {
+                if (res.data.items === null) {
                     console.log('User not found', res.data);
                     axios.post(`${process.env.REACT_APP_REST_URL}/users`, {
                         userId: `${user.userId}`,
@@ -27,18 +30,25 @@ export const LibraryScreen = () => {
             })
     });
 
+    // TODO : Give the songs of the user to the SongsGrid
+    // TODO : When clicking on a song, redirect to the music-player screen to listen to that song (use a params)
+    // TODO : When clicking on Shared songs, rerender and give the user's sharedSongs to the SongsGrid and redraw the grid
+
     return (
-        <>
+        <div className={"container"}>
             <div className={"header"}>
-                <div>Library Screen</div>
-                {/* Mettre le morceau MUSIFY quand le component sera fait */}
-                <div>
-                    <button onClick={() => window.location.href = '/upload'}>{t('uploadButton')}</button>
+                <Musify/>
+                <div className={"options"}>
+                    <div className={"options"}>
+                        <button onClick={() => console.log()}>{t('sharedSongsButton')}</button>
+                        <button onClick={() => window.location.href = '/upload'}>{t('uploadButton')}</button>
+                    </div>
+                    <SignOutAndLanguageSwitch/>
                 </div>
             </div>
             <div>
-                SongsGrid ici
+                {/*SongsGrid here*/}
             </div>
-        </>
+        </div>
     )
 }

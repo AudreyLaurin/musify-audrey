@@ -1,4 +1,19 @@
 {
   "greeting": "Bonjour",
-  "albumTitle": "Album"
+  "profileButton": "Profil",
+  "sharedSongsButton": "Chansons partagées",
+  "uploadButton": "Télécharger",
+  "searchBar": "Rechercher",
+  "confirmButton": "Confirmer",
+  "addButton": "Ajouter",
+  "cancelButton": "Annuler",
+  "deleteButton": "Supprimer",
+  "modifyButton": "Modifier",
+  "shareButton": "Partager",
+  "albumPicture": "Pochette d'album",
+  "albumTitle": "Titre de l'album",
+  "releaseYear": "Année de sortie de l'album",
+  "artist": "Artiste",
+  "songTitle": "Titre de la chanson",
+  "language": "Langue"
 }

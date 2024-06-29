@@ -29,6 +29,7 @@ const FileUpload: React.FC<{username: string}> = ({username}) => {
                 }
             });
             setMessage(response.data);
+            console.log(response.data)
         } catch (error) {
             console.error('Error uploading file:', error);
             setMessage('Error uploading file.');

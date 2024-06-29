@@ -1,4 +1,19 @@
 {
   "greeting": "こんにちは",
-  "albumTitle": "アルバム"
+  "profileButton": "プロフィール",
+  "sharedSongsButton": "共有された曲",
+  "uploadButton": "アップロード",
+  "searchBar": "検索",
+  "confirmButton": "確認",
+  "addButton": "追加",
+  "cancelButton": "キャンセル",
+  "deleteButton": "削除",
+  "modifyButton": "修正",
+  "shareButton": "共有",
+  "albumPicture": "アルバムの表紙",
+  "albumTitle": "アルバムのタイトル",
+  "releaseYear": "アルバムのリリース年",
+  "artist": "アーティスト",
+  "songTitle": "曲のタイトル",
+  "language": "言語"
 }

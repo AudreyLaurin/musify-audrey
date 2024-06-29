@@ -22,7 +22,6 @@ export const AudioPlayer = ({audioURL}: AudioPlayerProps)  => {
             audioRef.current.load();
             audioRef.current.src=audioSrc;
             audioRef.current.play();
-
         }
     }, [audioSrc]);
 
@@ -30,7 +29,6 @@ export const AudioPlayer = ({audioURL}: AudioPlayerProps)  => {
         <div>
             <audio ref={audioRef} controls>
                 <source src={audioURL} type="audio/mp3" />
-                Your browser does not support the audio element.
             </audio>
         </div>
     );

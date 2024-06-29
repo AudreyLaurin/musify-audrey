@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nova+Square&display=swap");
+
 .App {
   text-align: center;
 }
@@ -35,4 +37,40 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background-color: rgb(29, 32, 40);
+  color: rgb(120, 207, 190);
+  font-weight: bold;
+  font-family: "Nova Square", sans-serif;
+}
+
+button, select, audio {
+  color: rgb(29, 32, 40);
+}
+
+label {
+  padding-right: 25px;
+}
+
+.container {
+  max-width: 1080px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 2px rgb(120, 207, 190);
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }

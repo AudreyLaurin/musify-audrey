@@ -11,9 +11,9 @@
   "modifyButton": "Modify",
   "shareButton": "Share",
   "albumPicture": "Album Cover",
-  "albumTitle": "Album",
+  "albumTitle": "Album Title",
   "releaseYear": "Album Release Year",
   "artist": "Artist",
-  "title": "Title",
+  "songTitle": "Song Title",
   "language": "Language"
 }

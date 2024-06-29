@@ -10,6 +10,7 @@ interface SongRow {
     username?: String;
 }
 
+// TODO: Make the Grid that will be built when provided an array of songs
 export const SongsGrid = () => {
     const {t} = useTranslation()
 

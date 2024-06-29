@@ -1,4 +1,19 @@
 {
   "greeting": "你好",
-  "albumTitle": "专辑"
+  "profileButton": "个人资料",
+  "sharedSongsButton": "共享歌曲",
+  "uploadButton": "上传",
+  "searchBar": "搜索",
+  "confirmButton": "确认",
+  "addButton": "添加",
+  "cancelButton": "取消",
+  "deleteButton": "删除",
+  "modifyButton": "修改",
+  "shareButton": "分享",
+  "albumPicture": "专辑封面",
+  "albumTitle": "专辑标题",
+  "releaseYear": "专辑发行年",
+  "artist": "艺术家",
+  "songTitle": "歌曲标题",
+  "language": "语言"
 }
